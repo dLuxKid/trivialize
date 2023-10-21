@@ -10,7 +10,7 @@ export default function NoOfRounds() {
 
     return (
         <div className="w-full">
-            <label className="text-lg text-main-white text-start mb-2 font-medium">Pick the number of rounds</label>
+            <label className="text-lg text-main-white text-start font-medium">Pick the number of rounds</label>
             <select title="select rounds" value={selectedNumber} onChange={handleNumberChange}>
                 {Array.from({ length: 6 }, (_, index) => 5 + index).map((number) => (
                     <option key={number} value={number}>

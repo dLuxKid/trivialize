@@ -1,13 +1,37 @@
 import { create } from "zustand";
 
-interface State {
-  count: number;
-  increment: () => void;
-  decrement: () => void;
+interface gameState {
+  round: number;
+  players: {
+    [key: string]: number[];
+  };
+  metrix: {
+    point: number;
+    bonus: number;
+  };
+  setRound: (round: number) => void;
+  addPlayer: (playerName: string) => void;
+  updatePlayerScore: (score: number, playerName: string) => void;
 }
 
-export const useStore = create<State>((set) => ({
-  count: 0,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
+export const useStore = create<gameState>((set) => ({
+  round: 5,
+  players: {},
+  metrix: { point: 5, bonus: 3 },
+  setRound: (round: number) => set((state) => ({ ...state, round: round })),
+  addPlayer: (playerName: string) => {
+    set((state) => ({
+      ...state,
+      players: { ...state.players, [playerName]: [] },
+    }));
+  },
+  updatePlayerScore: (score: number, playerName: string) => {
+    set((state) => ({
+      ...state,
+      players: {
+        ...state.players,
+        [playerName]: [...state.players[playerName], score],
+      },
+    }));
+  },
 }));

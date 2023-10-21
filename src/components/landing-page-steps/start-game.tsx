@@ -1,7 +1,8 @@
+import Button from "../ui/btn";
 
 
-export default function start() {
+export default function StartGame() {
     return (
-        <div>start</div>
+        <Button text="GET STARTED" />
     )
 }
