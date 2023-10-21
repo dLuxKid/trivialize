@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input,
+select {
+  @apply h-[60px] w-full rounded-xl focus:border active:border border-main-black outline-none p-4 bg-white text-base text-main-black placeholder:text-base placeholder:text-main-black;
+}
