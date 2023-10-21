@@ -14,7 +14,7 @@ interface gameState {
   updatePlayerScore: (score: number, playerName: string) => void;
 }
 
-export const useStore = create<gameState>((set) => ({
+export const useGameStore = create<gameState>((set) => ({
   round: 5,
   players: {},
   metrix: { point: 5, bonus: 3 },

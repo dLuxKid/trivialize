@@ -53,7 +53,7 @@ export default function LandingPage() {
                 {CurrentView}
 
                 {Number(currentStep) === 0 &&
-                    <div onClick={handleNext}>
+                    <div onClick={handleNext} className="-mt-6">
                         <Button text='Get Started' bg='bg-main-primary' />
                     </div>
                 }

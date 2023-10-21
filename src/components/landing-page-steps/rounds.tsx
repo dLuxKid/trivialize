@@ -1,10 +1,14 @@
 import React, { useState } from "react"
+import { useGameStore } from "../../store";
 
 export default function NoOfRounds() {
     const [selectedNumber, setSelectedNumber] = useState<number>(5);
 
+    const setRound = useGameStore(state => state.setRound)
+
     const handleNumberChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedNumber(Number(event.target.value));
+        setRound(Number(event.target.value))
     };
 
 
