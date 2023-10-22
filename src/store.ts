@@ -1,24 +1,32 @@
 import { create } from "zustand";
 
 interface gameState {
-  round: number;
+  numberOfRounds: number;
+  numberOfPlayers: number;
   players: {
     [key: string]: number[];
   };
-  metrix: {
-    point: number;
-    bonus: number;
+  scoreMetrix: {
+    correctPoint: number;
+    bonusPoint: number;
   };
-  setRound: (round: number) => void;
+  setNumberOfRounds: (round: number) => void;
+  setNumberOfPlayers: (length: number) => void;
   addPlayer: (playerName: string) => void;
   updatePlayerScore: (score: number, playerName: string) => void;
+  setBonusScoreMetrix: (bonus: number) => void;
+  setCorrectScoreMetrix: (point: number) => void;
 }
 
 export const useGameStore = create<gameState>((set) => ({
-  round: 5,
+  numberOfRounds: 5,
+  numberOfPlayers: 2,
   players: {},
-  metrix: { point: 5, bonus: 3 },
-  setRound: (round: number) => set((state) => ({ ...state, round: round })),
+  scoreMetrix: { correctPoint: 5, bonusPoint: 3 },
+  setNumberOfRounds: (round: number) =>
+    set((state) => ({ ...state, numberOfRounds: round })),
+  setNumberOfPlayers: (no: number) =>
+    set((state) => ({ ...state, numberOfPlayers: no, players: {} })),
   addPlayer: (playerName: string) => {
     set((state) => ({
       ...state,
@@ -31,6 +39,24 @@ export const useGameStore = create<gameState>((set) => ({
       players: {
         ...state.players,
         [playerName]: [...state.players[playerName], score],
+      },
+    }));
+  },
+  setBonusScoreMetrix: (bonus: number) => {
+    set((state) => ({
+      ...state,
+      scoreMetrix: {
+        ...state.scoreMetrix,
+        bonusPoint: bonus,
+      },
+    }));
+  },
+  setCorrectScoreMetrix: (point: number) => {
+    set((state) => ({
+      ...state,
+      scoreMetrix: {
+        ...state.scoreMetrix,
+        correctPoint: point,
       },
     }));
   },
