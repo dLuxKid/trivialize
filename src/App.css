@@ -2,7 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scrollbar-color: #333 transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+*::-webkit-scrollbar {
+  width: none;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 input,
 select {
   @apply h-[60px] w-full rounded-xl focus:border active:border border-main-black outline-none p-4 bg-white text-base text-main-black placeholder:text-base placeholder:text-main-black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 1rem;
+}
+
+.container {
+  @apply w-full min-h-screen p-[5%];
 }

@@ -7,7 +7,7 @@ import NoOfRounds from "../components/landing-page-steps/rounds";
 import ScoringSystem from "../components/landing-page-steps/scoring-system";
 import StartGame from "../components/landing-page-steps/start-game";
 import OpeningHeader from "../components/opening-header";
-import Button from "../components/ui/btn";
+import Button from "../components/btn";
 
 import { useGameStore } from "../store";
 
@@ -51,19 +51,17 @@ export default function LandingPage() {
     const [disbaleBtn, setDisableBtn] = useState<boolean>(false)
     const numberOfPlayers = useGameStore().numberOfPlayers
     const players = useGameStore().players
-    const state = useGameStore()
 
     useEffect(() => {
         if (Number(currentStep) === 3) {
-            console.log(numberOfPlayers, Object.keys(players).length)
-            if (numberOfPlayers !== Object.keys(players).length) setDisableBtn(true)
-            console.log(players)
+            numberOfPlayers !== Object.keys(players).length ? setDisableBtn(true) : setDisableBtn(false)
         }
+        if (Number(currentStep) !== 3) setDisableBtn(false)
     }, [currentStep, players])
 
 
     return (
-        <div className="w-full min-h-screen px-[7.5%] py-[5%]">
+        <div className="container">
             <OpeningHeader />
             <div className="mt-12 w-full flex-1 h-full flex items-center justify-between flex-col gap-16 p-12 bg-main-accent rounded-xl">
                 {CurrentView}

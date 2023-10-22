@@ -20,7 +20,7 @@ export default function InputPlayerNames() {
     const handleAddPlayer = (index: number) => {
         const playerName = players[index]
         if (playerName) {
-            addPlayer(playerName)
+            addPlayer(playerName.trim())
             // setPlayers((prevPlayerNames) => {
             //     const updatedPlayerNames = [...prevPlayerNames];
             //     updatedPlayerNames[index] = '';
