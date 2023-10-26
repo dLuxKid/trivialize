@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../components/btn";
 import ResultTable from "../components/result-table";
@@ -43,8 +44,14 @@ export default function GamePage() {
     const [gameOver, setGameOver] = useState<boolean>(false)
     const [playerScore, setPlayerScore] = useState<PlayersScores>({})
 
+    const navigate = useNavigate()
+
     useEffect(() => {
-        Object.keys(players).forEach((playerName) => {
+        const listOfPlayers = Object.keys(players)
+
+        if (!listOfPlayers.length) return navigate('/')
+
+        listOfPlayers.forEach((playerName) => {
             setPlayerState((prev) => ({
                 ...prev,
                 [playerName]: {
@@ -53,6 +60,7 @@ export default function GamePage() {
                 }
             }))
         })
+
     }, [])
 
     const addCorrectPoint = (playerName: string) => {
@@ -77,7 +85,7 @@ export default function GamePage() {
         }))
     }
 
-    const handleNextRound = () => {
+    const setNextRound = () => {
         setGameRound(prev => prev + 1)
         Object.keys(players).forEach((playerName) => {
             setPlayerState((prev) => ({
@@ -111,7 +119,9 @@ export default function GamePage() {
                     Round {gameRound} of {noOfRounds}
                 </p>
             }
+
             {gameOver && <ConfettiExplosion />}
+
             <div className="w-full overflow-x-scroll shadow-lg">
                 {
                     !gameOver &&
@@ -128,7 +138,7 @@ export default function GamePage() {
                 }
             </div>
             <div className="mt-12">
-                {noOfRounds > gameRound && <Button text="Next round" onClick={handleNextRound} />}
+                {noOfRounds > gameRound && <Button text="Next round" onClick={setNextRound} />}
                 {noOfRounds === gameRound && !gameOver && <Button text="Announce Winner" onClick={calculateWinner} />}
             </div>
         </div>
